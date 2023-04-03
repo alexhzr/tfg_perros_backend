@@ -1,4 +1,5 @@
 package com.alexhernandez.tfgperros.model
 
-class Name {
+data class Name(val firstName: String, val lastName: String) {
+
 }
