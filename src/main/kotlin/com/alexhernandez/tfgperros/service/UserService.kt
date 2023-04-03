@@ -1,4 +1,9 @@
 package com.alexhernandez.tfgperros.service
 
-class UserService {
+import com.alexhernandez.tfgperros.model.User
+import org.springframework.stereotype.Service
+
+@Service
+interface UserService {
+    fun registerUser(user: User): String
 }
