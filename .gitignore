@@ -7,9 +7,7 @@ mvnw
 mvnw.cmd
 .mvn/*
 ### Configuration files ###
-tfg-perros-firebase-adminsdk-w710f-15dd230caa.json
-
-
+src/main/kotlin/com/alexhernandez/tfgperros/config/firebase-service-account.json
 
 ### STS ###
 .apt_generated
