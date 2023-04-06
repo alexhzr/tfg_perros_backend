@@ -7,26 +7,28 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
 @RestController
-@RequestMapping("/user", consumes = ["application/json"])
+@RequestMapping("/user")
 class UserController(@Autowired val userService: UserService) {
 
-    @GetMapping()
-    fun getUsers() :ResponseEntity<*> {
-        return ResponseEntity.ok("Aqui estás")
+    @GetMapping("/{userDNI}")
+    fun getUsers(@PathVariable userDNI: String) :ResponseEntity<*> {
+        val user = userService.getUserByDNI(userDNI)
+
+        return ResponseEntity.ok(user)
     }
 
-    @PostMapping()
-    fun registerUser(@RequestBody user: User) :ResponseEntity<*> {
-        var response = ResponseEntity.accepted().body("Yes")
+    @GetMapping("/search")
+    fun checkUserExists(@RequestParam dni: String, @RequestParam email: String) {
+        userService.checkIfUserExists(dni, email)
+    }
 
+
+    @PostMapping(consumes = ["application/json"])
+    fun registerUser(@RequestBody user: User) :ResponseEntity<*> {
         var resp = userService.registerUser(user)
 
-        if (resp != null) {
-            response = ResponseEntity.ok(resp)
-        } else {
-            response = ResponseEntity.badRequest().body("Error: "+resp)
-        }
-
-        return response
+        return if (resp.success) ResponseEntity.ok(resp.message)
+            else if (resp.exceptionThrow) ResponseEntity.internalServerError().body(resp.getMessageOrException())
+            else ResponseEntity.badRequest().body(resp.message)
     }
 }
