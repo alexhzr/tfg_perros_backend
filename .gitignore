@@ -8,6 +8,7 @@ mvnw.cmd
 .mvn/*
 ### Configuration files ###
 src/main/kotlin/com/alexhernandez/tfgperros/config/firebase-service-account.json
+src/main/kotlin/com/alexhernandez/tfgperros/service/FirebaseInitializer.kt
 
 ### STS ###
 .apt_generated
