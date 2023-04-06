@@ -6,4 +6,7 @@ data class User(
     val dni: String,
     val userType: Int
     ) {
+
+    constructor(): this(Name("", ""), "", "", 0)
+
 }
